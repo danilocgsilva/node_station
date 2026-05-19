@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "screen_update"
+name = "update_screen"
 version = "0.1.0"

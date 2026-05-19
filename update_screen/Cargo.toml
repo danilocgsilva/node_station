@@ -1,7 +1,6 @@
 [package]
-name = "screen_update_windows"
+name = "update_screen"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-ansi_term = "0.12.1"
