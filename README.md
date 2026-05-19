@@ -1,2 +1,3 @@
 * `loop_data` -> Its a loop to print information for each second. Might be used to update time by time data about computer resource.
 * `screen_update` -> Update the terminal. Note: maybe it must run only in Linux.
+* `update_screen_util` -> Smarter way to update the screen.
