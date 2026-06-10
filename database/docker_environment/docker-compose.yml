@@ -1,14 +1,14 @@
 services:
   node_station_db:
-    image: postgres:15
+    image: postgres:16
     container_name: node_station_db
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: strongpassword
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     ports:
-      - 5432:5432"
+      - "5443:5432"
 
   node_station_pgadmin:
     image: dpage/pgadmin4:latest
@@ -17,12 +17,14 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-pgadmin@example.com}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-password}
     volumes:
-      - ./pgadmin_data:/var/lib/pgadmin
+      - pgadmin_data:/var/lib/pgadmin
     ports:
-      - "${PGADMIN_PORT:-8080}:80"
-    restart: unless-stopped
-    networks:
-      - postgres-network
+      - "8380:80"
     depends_on:
-      - postgres
+      - node_station_db
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+
 
