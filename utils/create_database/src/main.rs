@@ -1,4 +1,6 @@
 use std::io::{self, Write};
+use tokio_postgres::{Client, NoTls};
+use std::error::Error;
 
 fn ask_data(asking_title: &str) -> String {
     print!("{asking_title}");
@@ -29,4 +31,6 @@ fn main() {
     println!("The database user is {database_user}.");
     println!("The database password is {database_password}.");
     println!("The database port is {database_port}.");
+
+    let (client, connection) = Client::connect("host={database_host} user={database_user} password={database_password}, NoTls").await?;
 }
