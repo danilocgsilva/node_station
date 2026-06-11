@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: strongpassword
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - "./postgres_data:/var/lib/postgresql/data"
     ports:
       - "5443:5432"
 
@@ -14,17 +14,13 @@ services:
     image: dpage/pgadmin4:latest
     container_name: node_station_pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-pgadmin@example.com}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-password}
+      PGADMIN_DEFAULT_EMAIL: admin@me.com
+      PGADMIN_DEFAULT_PASSWORD: strongpassword
     volumes:
-      - pgadmin_data:/var/lib/pgadmin
+      - "./pgadmin_data:/var/lib/pgadmin"
     ports:
       - "8380:80"
     depends_on:
       - node_station_db
-
-volumes:
-  postgres_data:
-  pgadmin_data:
 
 

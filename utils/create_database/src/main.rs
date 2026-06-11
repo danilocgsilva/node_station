@@ -8,11 +8,22 @@ fn ask_data(asking_title: &str) -> String {
     String::from(raw_input.trim_end())
 }
 
+fn ask_sensitive_data(asking_title: &str) -> String {
+    rpassword::prompt_password(asking_title).expect("Error: unable to read password")
+}
+
 fn main() {
-    let database_host: String = ask_data("Tell me the database host: ");
-    let database_user: String = ask_data("Tell me the database user: ");
-    let database_password: String = ask_data("Tell me the database password: ");
-    let database_port: String = ask_data("Tell me the database port: ");
+    let database_host: String
+        = ask_data("Tell me the database host: ");
+
+    let database_user: String
+        = ask_data("Tell me the database user: ");
+
+    let database_password: String
+        = ask_sensitive_data("Tell me the database password: ");
+
+    let database_port: String
+        = ask_data("Tell me the database port: ");
 
     println!("The database host is {database_host}.");
     println!("The database user is {database_user}.");
