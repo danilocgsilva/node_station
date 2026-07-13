@@ -14,7 +14,8 @@ fn ask_sensitive_data(asking_title: &str) -> String {
     rpassword::prompt_password(asking_title).expect("Error: unable to read password")
 }
 
-fn main() {
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn Error>> {
     let database_host: String
         = ask_data("Tell me the database host: ");
 
@@ -32,5 +33,17 @@ fn main() {
     println!("The database password is {database_password}.");
     println!("The database port is {database_port}.");
 
-    let (client, connection) = Client::connect("host={database_host} user={database_user} password={database_password}, NoTls").await?;
+    let connection_string = format!(
+        "host={} user={} password={} port={}",
+        database_host, database_user, database_password, database_port
+    );
+
+    let (_client, _connection) = tokio_postgres::connect(&connection_string, NoTls).await?;
+
+    // client.execute("CREATE DATABASE my_new_database", &[]).await?;
+
+    Ok(())
+
+    // let (client, connection) = Client::connect("host={database_host} user={database_user} password={database_password}, NoTls").await?;
+    // Client::connect("host={database_host} user={database_user} password={database_password}, NoTls").await?
 }

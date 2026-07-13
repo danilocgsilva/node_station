@@ -6,4 +6,4 @@ edition = "2024"
 [dependencies]
 rpassword = "7.0"
 tokio = { version = "1", features = ["full"] }
-tokio-postgres = "0.8"
+tokio-postgres = "0.7"
